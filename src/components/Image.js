@@ -1,7 +1,18 @@
 import React, { useState, useCallback, useContext } from "react";
 import { Context } from "../Context";
+import PropTypes from "prop-types";
 
 const Image = ({ className, img }) => {
+
+  Image.propTypes = {
+    className: PropTypes.string,
+    img: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+      isFavorite: PropTypes.bool,
+    }),
+  };
+
   const { toggleFavorite } = useContext(Context);
 
   const [isHovered, setIsHovered] = useState(false);
