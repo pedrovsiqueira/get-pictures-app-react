@@ -18,6 +18,12 @@ const Image = ({ className, img }) => {
       onMouseLeave={handleHoverLeave}
     >
       <img src={img.url} alt="Imgs" className="image-grid" />
+      {isHovered && (
+        <>
+          <i className="ri-heart-line favorite"></i>
+          <i className="ri-add-circle-line cart"></i>
+        </>
+      )}
     </div>
   );
 };
