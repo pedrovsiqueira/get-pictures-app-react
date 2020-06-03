@@ -8,8 +8,8 @@ const ContextProvider = ({ children }) => {
 
   const handleAddToCart = (img) => {
     setCartItems((prevState) => [...prevState, img]);
-    console.log(cartItems);
   };
+  console.log(cartItems);
 
   const toggleFavorite = (id) => {
     const updatedPhotosArr = photos.map((photo) => {
