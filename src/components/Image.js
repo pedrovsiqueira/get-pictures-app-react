@@ -12,7 +12,7 @@ const Image = ({ className, img }) => {
     }),
   };
 
-  const { toggleFavorite, handleAddToCart } = useContext(Context);
+  const { toggleFavorite, handleAddToCart, cartItems } = useContext(Context);
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -24,26 +24,33 @@ const Image = ({ className, img }) => {
     setIsHovered(false);
   }, []);
 
-  const heartIcon = isHovered && !img.isFavorite && (
-    <i
-      onClick={() => toggleFavorite(img.id)}
-      className="ri-heart-line favorite"
-    ></i>
-  );
+  const heartIcon = () => {
+    if (img.isFavorite) {
+      return (
+        <i
+          onClick={() => toggleFavorite(img.id)}
+          className="ri-heart-fill favorite"
+        ></i>
+      );
+    } else if (isHovered) {
+      return (
+        <i
+          onClick={() => toggleFavorite(img.id)}
+          className="ri-heart-line favorite"
+        ></i>
+      );
+    }
+  };
 
-  const heartIconFilled = isHovered && img.isFavorite && (
-    <i
-      onClick={() => toggleFavorite(img.id)}
-      className="ri-heart-fill favorite"
-    ></i>
-  );
-
-  const cartIcon = isHovered && (
-    <i
-      onClick={() => handleAddToCart(img)}
-      className="ri-add-circle-line cart"
-    ></i>
-  );
+  const cartIcon = () => {
+    if (cartItems.includes(img)) {
+      return <i className="ri-add-circle-fill cart"></i>;
+    } else if (isHovered) {
+      return (
+        <i onClick={() => handleAddToCart(img)} className="ri-add-circle-line cart"></i>
+      );
+    }
+  };
 
   return (
     <div
@@ -52,9 +59,8 @@ const Image = ({ className, img }) => {
       onMouseLeave={handleHoverLeave}
     >
       <img src={img.url} alt="Imgs" className="image-grid" />
-      {heartIcon}
-      {cartIcon}
-      {heartIconFilled}
+      {heartIcon()}
+      {cartIcon()}
     </div>
   );
 };

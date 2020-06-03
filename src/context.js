@@ -7,10 +7,7 @@ const ContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const handleAddToCart = (img) => {
-
-    if (!cartItems.includes(img)) {
-      setCartItems((prevState) => [...prevState, img]);
-    }
+    setCartItems((prevState) => [...prevState, img]);
     console.log(cartItems);
   };
 
@@ -35,7 +32,9 @@ const ContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <Context.Provider value={{ photos, toggleFavorite, handleAddToCart }}>
+    <Context.Provider
+      value={{ photos, toggleFavorite, handleAddToCart, cartItems }}
+    >
       {children}
     </Context.Provider>
   );
