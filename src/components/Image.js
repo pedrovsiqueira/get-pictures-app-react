@@ -12,7 +12,12 @@ const Image = ({ className, img }) => {
     }),
   };
 
-  const { toggleFavorite, handleAddToCart, cartItems } = useContext(Context);
+  const {
+    toggleFavorite,
+    handleAddToCart,
+    cartItems,
+    handleRemoveFromCart,
+  } = useContext(Context);
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -45,7 +50,12 @@ const Image = ({ className, img }) => {
   const cartIcon = () => {
     const alreadyInCart = cartItems.some((item) => item.id === img.id);
     if (alreadyInCart) {
-      return <i className="ri-add-circle-fill cart"></i>;
+      return (
+        <i
+          onClick={() => handleRemoveFromCart(img)}
+          className="ri-add-circle-fill cart"
+        ></i>
+      );
     } else if (isHovered) {
       return (
         <i
