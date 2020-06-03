@@ -1,8 +1,8 @@
-# Speed Typing Game - React
+# Get Pictures App - React
 
 
 ## About The Project
-This game was built to practice Javascript and React. 
+This app is a basic E-Commerce example to buy photos. It was built to practice Javascript and React.
 
 
 ![Desktop views](public/screenshot.png)
