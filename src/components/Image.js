@@ -3,7 +3,6 @@ import { Context } from "../Context";
 import PropTypes from "prop-types";
 
 const Image = ({ className, img }) => {
-
   Image.propTypes = {
     className: PropTypes.string,
     img: PropTypes.shape({
@@ -13,7 +12,7 @@ const Image = ({ className, img }) => {
     }),
   };
 
-  const { toggleFavorite } = useContext(Context);
+  const { toggleFavorite, handleAddToCart } = useContext(Context);
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -39,7 +38,12 @@ const Image = ({ className, img }) => {
     ></i>
   );
 
-  const cartIcon = isHovered && <i className="ri-add-circle-line cart"></i>;
+  const cartIcon = isHovered && (
+    <i
+      onClick={() => handleAddToCart(img)}
+      className="ri-add-circle-line cart"
+    ></i>
+  );
 
   return (
     <div

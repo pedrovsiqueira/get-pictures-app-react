@@ -4,6 +4,15 @@ const Context = createContext({});
 
 const ContextProvider = ({ children }) => {
   const [photos, setPhotos] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
+  const handleAddToCart = (img) => {
+
+    if (!cartItems.includes(img)) {
+      setCartItems((prevState) => [...prevState, img]);
+    }
+    console.log(cartItems);
+  };
 
   const toggleFavorite = (id) => {
     const updatedPhotosArr = photos.map((photo) => {
@@ -26,7 +35,7 @@ const ContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <Context.Provider value={{ photos, toggleFavorite }}>
+    <Context.Provider value={{ photos, toggleFavorite, handleAddToCart }}>
       {children}
     </Context.Provider>
   );
