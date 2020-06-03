@@ -5,6 +5,17 @@ const Context = createContext({});
 const ContextProvider = ({ children }) => {
   const [photos, setPhotos] = useState([]);
 
+  const toggleFavorite = (id) => {
+    const updatedPhotosArr = photos.map((photo) => {
+      if (photo.id === id) {
+        return { ...photo, isFavorite: !photo.isFavorite };
+      }
+      return photo;
+    });
+
+    setPhotos(updatedPhotosArr);
+  };
+
   useEffect(() => {
     axios
       .get(
@@ -14,7 +25,11 @@ const ContextProvider = ({ children }) => {
       .catch((err) => console.log(err));
   }, []);
 
-  return <Context.Provider value={{ photos }}>{children}</Context.Provider>;
+  return (
+    <Context.Provider value={{ photos, toggleFavorite }}>
+      {children}
+    </Context.Provider>
+  );
 };
 
 export { ContextProvider, Context };

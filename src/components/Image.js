@@ -1,6 +1,9 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
+import { Context } from "../Context";
 
 const Image = ({ className, img }) => {
+  const { toggleFavorite } = useContext(Context);
+
   const [isHovered, setIsHovered] = useState(false);
 
   const handleHoverEnter = useCallback(() => {
@@ -20,7 +23,10 @@ const Image = ({ className, img }) => {
       <img src={img.url} alt="Imgs" className="image-grid" />
       {isHovered && (
         <>
-          <i className="ri-heart-line favorite"></i>
+          <i
+            onClick={() => toggleFavorite(img.id)}
+            className="ri-heart-line favorite"
+          ></i>
           <i className="ri-add-circle-line cart"></i>
         </>
       )}
