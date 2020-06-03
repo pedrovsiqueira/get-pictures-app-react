@@ -14,6 +14,22 @@ const Image = ({ className, img }) => {
     setIsHovered(false);
   }, []);
 
+  const heartIcon = isHovered && !img.isFavorite && (
+    <i
+      onClick={() => toggleFavorite(img.id)}
+      className="ri-heart-line favorite"
+    ></i>
+  );
+
+  const heartIconFilled = isHovered && img.isFavorite && (
+    <i
+      onClick={() => toggleFavorite(img.id)}
+      className="ri-heart-fill favorite"
+    ></i>
+  );
+
+  const cartIcon = isHovered && <i className="ri-add-circle-line cart"></i>;
+
   return (
     <div
       className={`${className} image-container`}
@@ -21,15 +37,9 @@ const Image = ({ className, img }) => {
       onMouseLeave={handleHoverLeave}
     >
       <img src={img.url} alt="Imgs" className="image-grid" />
-      {isHovered && (
-        <>
-          <i
-            onClick={() => toggleFavorite(img.id)}
-            className="ri-heart-line favorite"
-          ></i>
-          <i className="ri-add-circle-line cart"></i>
-        </>
-      )}
+      {heartIcon}
+      {cartIcon}
+      {heartIconFilled}
     </div>
   );
 };
