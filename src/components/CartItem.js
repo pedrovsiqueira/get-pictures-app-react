@@ -1,28 +1,20 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Context } from "../Context";
+import PropTypes from 'prop-types'
+import useHover from '../hooks/useHover'
 
 const CartItem = ({ item }) => {
   const { handleRemoveFromCart } = useContext(Context);
+  const [isHovered, ref] = useHover()
 
-  const [isHoveredOnTrash, setIsHoveredOnTrash] = useState(false);
-
-  const handleHoverEnter = () => {
-    setIsHoveredOnTrash(true);
-  };
-
-  const handleHoverLeave = () => {
-    setIsHoveredOnTrash(false);
-  };
-
-  const trashClassName = isHoveredOnTrash
+  const trashClassName = isHovered
     ? "ri-delete-bin-fill"
     : "ri-delete-bin-line";
 
   return (
     <div className="cart-item">
       <i
-        onMouseEnter={handleHoverEnter}
-        onMouseLeave={handleHoverLeave}
+        ref={ref}
         onClick={() => handleRemoveFromCart(item)}
         className={trashClassName}
       ></i>
@@ -30,6 +22,12 @@ const CartItem = ({ item }) => {
       <p>$5.99</p>
     </div>
   );
+};
+
+CartItem.propTypes = {
+  item: PropTypes.shape({
+    url: PropTypes.string.isRequired,
+  }),
 };
 
 export default CartItem;
