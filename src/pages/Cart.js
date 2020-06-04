@@ -19,7 +19,9 @@ function Cart() {
       {cartItemElements}
       <p className="total-cost">Total: {calculateTotalCost()}</p>
       <div className="order-button">
-        <button onClick={() => placeOrder()}>{textButton}</button>
+        {cartItems.length > 0 && 
+          <button onClick={() => placeOrder()}>{textButton}</button>
+        }
       </div>
     </main>
   );
