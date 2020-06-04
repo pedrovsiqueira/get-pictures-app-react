@@ -13,7 +13,13 @@ const ContextProvider = ({ children }) => {
   const handleRemoveFromCart = (img) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== img.id));
   };
-  console.log(cartItems);
+
+  const calculateTotalCost = () => {
+    return (cartItems.length * 5.99).toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+  };
 
   const toggleFavorite = (id) => {
     const updatedPhotosArr = photos.map((photo) => {
@@ -42,6 +48,7 @@ const ContextProvider = ({ children }) => {
         handleAddToCart,
         cartItems,
         handleRemoveFromCart,
+        calculateTotalCost,
       }}
     >
       {children}
