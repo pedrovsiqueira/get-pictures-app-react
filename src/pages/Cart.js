@@ -6,9 +6,12 @@ function Cart() {
   const { cartItems, calculateTotalCost, placeOrder, isOrdered } = useContext(
     Context
   );
+
   const cartItemElements = cartItems.map((item) => (
     <CartItem key={item.id} item={item} />
   ));
+
+  const textButton = isOrdered ? "Ordering..." : "Place Order";
 
   return (
     <main className="cart-page">
@@ -16,9 +19,7 @@ function Cart() {
       {cartItemElements}
       <p className="total-cost">Total: {calculateTotalCost()}</p>
       <div className="order-button">
-        <button onClick={() => placeOrder()}>
-          {isOrdered ? "Ordering..." : "Place Order"}
-        </button>
+        <button onClick={() => placeOrder()}>{textButton}</button>
       </div>
     </main>
   );
