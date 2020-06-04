@@ -3,7 +3,9 @@ import { Context } from "../Context";
 import CartItem from "../components/CartItem";
 
 function Cart() {
-  const { cartItems, calculateTotalCost } = useContext(Context);
+  const { cartItems, calculateTotalCost, placeOrder, isOrdered } = useContext(
+    Context
+  );
   const cartItemElements = cartItems.map((item) => (
     <CartItem key={item.id} item={item} />
   ));
@@ -14,7 +16,9 @@ function Cart() {
       {cartItemElements}
       <p className="total-cost">Total: {calculateTotalCost()}</p>
       <div className="order-button">
-        <button>Place Order</button>
+        <button onClick={() => placeOrder()}>
+          {isOrdered ? "Ordering..." : "Place Order"}
+        </button>
       </div>
     </main>
   );

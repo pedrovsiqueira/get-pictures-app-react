@@ -5,6 +5,7 @@ const Context = createContext({});
 const ContextProvider = ({ children }) => {
   const [photos, setPhotos] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [isOrdered, setIsOrdered] = useState(false)
 
   const handleAddToCart = (img) => {
     setCartItems((prevState) => [...prevState, img]);
@@ -31,6 +32,16 @@ const ContextProvider = ({ children }) => {
     setPhotos(updatedPhotosArr);
   };
 
+  const placeOrder = () => {
+    setIsOrdered(true)
+
+    setTimeout(() => {
+      console.log('Order placed!')
+      setCartItems([])
+      setIsOrdered(false)
+    }, 3000)
+  }
+
   useEffect(() => {
     axios
       .get(
@@ -49,6 +60,8 @@ const ContextProvider = ({ children }) => {
         cartItems,
         handleRemoveFromCart,
         calculateTotalCost,
+        placeOrder,
+        isOrdered,
       }}
     >
       {children}
